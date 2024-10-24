@@ -1,0 +1,96 @@
+
+Solution
+
+
+/------------------------------------------------------------------/
+Caesar Cipher: 
+
+I used the Caesar Cipher, where the encryption is done by shifting each letter by a fixed amount. 
+In my case, I applied a shift of -3, meaning each letter in the encrypted text was shifted back by three positions in the alphabet. 
+I simply looped through each character, applied the shift, and decrypted the message back to its original form.
+
+
+/------------------------------------------------------------------/
+Simple Shift Cipher:
+
+In this method, I tried all possible shifts from 1 to 26 to find the correct decryption. 
+For each shift, I applied a similar process as the Caesar Cipher. 
+By generating all possible decrypted texts, I reviewed each one to see which shift revealed the original message. 
+This brute-force approach ensures that I eventually find the correct decryption.
+
+
+/------------------------------------------------------------------/
+Affine Cipher: 
+
+The Affine Cipher works by applying a mathematical transformation to each letter using a formula E(x) = (a * x + b) % 26, 
+where a and b are the cipher’s keys. 
+To decrypt the text, I needed to reverse this operation, which involved finding the multiplicative inverse of a modulo 26, 
+since the alphabet has 26 letters. 
+I calculated the inverse a_inv for each valid a and then applied it to reverse the transformation. 
+I tried all combinations of a and b, generating a decrypted version for each pair. 
+By reviewing the output, I could identify the correct values for a and b, which gave me the original message. 
+This method was more complex than the simple shift because it required both modular arithmetic and trial-and-error testing for each combination of keys.
+
+
+/------------------------------------------------------------------/
+Substitution Cipher with a keyword: 
+
+To solve the substitution cipher, I started by constructing a substitution alphabet using a given keyword. 
+The idea was to take all unique letters from the keyword (in the order they appear) and use them as the starting sequence for the substitution alphabet. 
+After adding the keyword’s letters, I filled in the rest of the alphabet with the remaining unused letters in their natural order. 
+This gave me a complete alphabet that I could use to map the encrypted text to the original one.
+
+Once the substitution alphabet was created, I reversed it to create a decryption table. 
+This table allowed me to substitute each letter from the encrypted text with its corresponding letter from the original alphabet. 
+If the keyword was not known, I tried using a list of popular keywords such as “PASSWORD” and “SECRET,” applying the same procedure for each keyword to see if any meaningful decrypted text emerged.
+
+During the decryption process, I also utilized any known letter mappings between the encrypted and decrypted text. 
+For example, if I knew that certain letters in the encrypted text corresponded to specific letters in the decrypted text (known as known_mapping), I could integrate those mappings into the substitution process. 
+This helped narrow down the possible solutions by partially decrypting the text based on those clues.
+
+I systematically decrypted the text with different keywords from the list. After each decryption attempt, 
+I checked if the resulting text contained any common English words like "THE" or "AND." 
+This helped me identify whether I was on the right track. 
+As I tried various keywords, I found a few potential matches, like:
+
+Possible match with keyword 'TERRA':
+INPADLIZKEXSXSCEMSTSINMOSCFORMSOFZRXPCOGRTPHXTPIEZEOFINFORMTCIONZTLLEBTKEXISASEBCOCRTNSFORMMESSTGEINCOZRXPCIZFORM
+
+Possible match with keyword 'WAVE':
+INPVBLIZKEXSXSTEMSUSINMOSTFORMSOFZRXPTOGRUPHXUPIEZEOFINFORMUTIONZULLEDUKEXISVSEDTOTRUNSFORMMESSUGEINTOZRXPTIZFORM
+
+Possible match with keyword 'ZEBRA':
+INPUELIAKCYSYSDCMSTSINMOSDFORMSOFARYPDOGRTPHYTPICACOFINFORMTDIONATLLCBTKCYISUSCBDODRTNSFORMMCSSTGCINDOARYPDIAFORM
+
+Possible match with keyword 'EASY':
+INPUBLIZKEYSYSTEMSCSINMOSTFORMSOFZRYPTOGRCPHYCPIEZEOFINFORMCTIONZCLLEACKEYISUSEATOTRCNSFORMMESSCGEINTOZRYPTIZFORM
+
+Possible match with keyword 'SUCCESS':
+INPUELIZKFXSXSTFMSASINMOSTCORMSOCZRXPTOGRAPHXAPIFZFOCINCORMATIONZALLFDAKFXISUSFDTOTRANSCORMMFSSAGFINTOZRXPTIZCORM
+
+
+which produced partially meaningful results.
+
+
+As I analyzed the results, I gradually understood more words within the decrypted text. 
+For instance, phrases like “in key systems as,” “in most forms of cryptography,” 
+and “a key to transform message into cryptic form” started to make sense. 
+This allowed me to further refine my decryption efforts.
+
+	'Z': 'C',
+	'P': 'R',
+	'X': 'Y',
+	'N': 'P',
+	'R': 'T',
+	'M': 'O',
+	'D': 'G',
+	'S': 'A',
+	'F': 'H'
+
+
+Eventually, with enough partial matches and clues from the known mappings, I was able to fully decrypt the text. 
+The final decrypted message read: “In public key systems, as in most forms of cryptography, 
+a piece of information called a key is used to transform a message into cryptic form.”
+
+By combining keyword guesses with known letter mappings and common English words, I successfully decoded the entire message step by step.
+
